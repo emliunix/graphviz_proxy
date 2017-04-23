@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Graphviz Converter</title>
+</head>
+<body>
+    Hello world!!!
+
+    <textarea name="code" id="code" cols="30" rows="10"></textarea>
+    <button id="submit_btn">Submit</button>
+    <pre id="result"></pre>
+    <script>
+        (function() {
+            var code_input = document.querySelector("#code");
+            var result = document.querySelector("#result")
+            document.querySelector("#submit_btn").onclick = function() {
+                var val = code_input.value;
+                fetch("/exec", {
+                    method: "POST",
+                    body: new Blob([val])
+                })
+                .then(res => res.text())
+                .then(txt => result.innerHTML = txt)
+            }
+        })();
+    </script>
+</body>
+</html>
